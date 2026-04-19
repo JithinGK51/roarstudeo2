@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Movies: Anyone can read, only admins (stub) can write
+    match /movies/{movieId} {
+      allow read: if true;
+      allow write: if false; // Requires server-side or admin
+    }
+
+    // News: Anyone can read
+    match /news/{newsId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Jobs: Anyone can read, applications would be a separate subcollection
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

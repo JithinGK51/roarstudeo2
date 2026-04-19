@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "movie": {
+      "title": "Movie",
+      "description": "A cinematic production by Roarstar Studios",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the movie" },
+        "year": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "rating": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["title", "year", "category"]
+    },
+    "news": {
+      "title": "News Item",
+      "description": "Studio intelligence and updates",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "date": { "type": "string" },
+        "category": { "type": "string" },
+        "excerpt": { "type": "string" }
+      },
+      "required": ["title", "date"]
+    },
+    "job": {
+      "title": "Job Career",
+      "description": "Career opportunity at Roarstar",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "location": { "type": "string" },
+        "type": { "type": "string" },
+        "department": { "type": "string" }
+      },
+      "required": ["title", "location"]
+    }
+  },
+  "firestore": {
+    "/movies/{movieId}": { "schema": "movie", "description": "Collection of movies" },
+    "/news/{newsId}": { "schema": "news", "description": "Collection of news items" },
+    "/jobs/{jobId}": { "schema": "job", "description": "Collection of job listings" }
+  }
+}
